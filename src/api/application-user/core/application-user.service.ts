@@ -59,4 +59,12 @@ export class ApplicationUserService {
       throw new InternalServerErrorException();
     }
   }
+
+  async finduserName(userName: string): Promise<ApplicationUser> {
+    try {
+      return await this.applicationUserRepository.findOneByOrFail({ userName });
+    } catch (error) {
+      throw new InternalServerErrorException();
+    }
+  }
 }

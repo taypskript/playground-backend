@@ -3,7 +3,7 @@ import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class PasswordHashService {
-  async passwordHash(password: string) {
+  async passwordHash(password: string): Promise<string> {
     try {
       const saltOrRounds = 10;
       const salt = bcrypt.genSaltSync(saltOrRounds);
@@ -14,11 +14,11 @@ export class PasswordHashService {
     }
   }
 
-  async passwordCompare(password: string) {
+  async passwordCompare(
+    password: string,
+    hashPassword: string,
+  ): Promise<boolean> {
     try {
-      const saltOrRounds = 10;
-      const salt = bcrypt.genSaltSync(saltOrRounds);
-      const hashPassword = bcrypt.hashSync(password, salt);
       const result = await bcrypt.compare(password, hashPassword);
       return result;
     } catch (error) {

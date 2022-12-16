@@ -12,7 +12,7 @@ import { ApplicationUserDto } from '../data/application-user.dto';
 import { ApplicationUser } from '../data/application-user.entity';
 import { ApplicationUserService } from './application-user.service';
 
-@Controller('application-user')
+@Controller('application-users')
 export class ApplicationUserController {
   constructor(
     private readonly applicationUserService: ApplicationUserService,
