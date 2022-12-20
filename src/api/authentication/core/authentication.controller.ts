@@ -1,5 +1,4 @@
 import { Controller, Post, Request, UseGuards } from '@nestjs/common';
-import { ApplicationUser } from 'src/api/application-user/data/application-user.entity';
 import { LocalAuthGuard } from 'src/common/guards/local-auth.guard';
 import { AuthenticationService } from './authentication.service';
 
@@ -9,7 +8,7 @@ export class AuthenticationController {
 
   @UseGuards(LocalAuthGuard)
   @Post('login')
-  async validateApplicationUser(@Request() request): Promise<ApplicationUser> {
-    return await request.user;
+  async validateApplicationUser(@Request() request) {
+    return await this.authenticationService.login(request.user);
   }
 }
