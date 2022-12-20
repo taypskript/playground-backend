@@ -6,7 +6,7 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
   createTypeOrmOptions(): TypeOrmModuleOptions {
     return {
       type: 'mysql',
-      host: '172.18.0.3',
+      host: '172.18.0.2',
       port: 3306,
       username: 'root',
       password: 'notSecureChangeMe',

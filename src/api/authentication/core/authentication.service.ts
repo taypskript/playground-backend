@@ -2,7 +2,6 @@ import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { ApplicationUserService } from 'src/api/application-user/core/application-user.service';
 import { ApplicationUser } from 'src/api/application-user/data/application-user.entity';
 import { PasswordHashService } from 'src/configuration/hashing/password-hashing.service';
-import { AuthenticationDto } from '../data/authentication.dto';
 
 @Injectable()
 export class AuthenticationService {
@@ -12,10 +11,10 @@ export class AuthenticationService {
   ) {}
 
   async validateApplicationUser(
-    dto: AuthenticationDto,
+    userName: string,
+    password: string,
   ): Promise<ApplicationUser> {
     try {
-      const { userName, password } = dto;
       const applicationUser = await this.applicationUserService.finduserName(
         userName,
       );
@@ -24,11 +23,11 @@ export class AuthenticationService {
         applicationUser.password,
       );
 
-      console.log(applicationUser);
-
       if (comparePassword === true) {
         return applicationUser;
       }
+
+      return null;
     } catch (error) {
       throw new InternalServerErrorException();
     }
